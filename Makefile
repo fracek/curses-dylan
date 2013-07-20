@@ -5,7 +5,7 @@ all: build
 .PHONY: build test
 
 curses.dylan: curses.intr
-	$(MELANGE) -Tc-ffi curses.intr curses.dylan
+	$(MELANGE) -Tc-ffi -m module.dylan curses.intr curses.dylan
 
 build: curses.dylan
 	dylan-compiler -build curses
@@ -13,6 +13,10 @@ build: curses.dylan
 test: curses.dylan
 	dylan-compiler -build curses-test-suite-app
 	_build/bin/curses-test-suite-app
+
+hello-world:
+	dylan-compiler -build hello-world
+	_build/bin/hello-world
 
 clean:
 	rm -f curses.dylan
